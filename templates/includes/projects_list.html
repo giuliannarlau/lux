@@ -1,0 +1,56 @@
+{% block content %}
+
+  <!-- Image cards -->
+  <div class="row justify-content-center">
+    {% for project in projects_list %}
+      <div class="col-md-4 col-md mb-3">
+        <div class="card project-card">
+          <img
+          src="/{{ project['image_path'] }}"
+          class="card-img"
+          alt="project image"
+          />
+          <button
+          class="btn-orange stretched-link w-100"
+          onclick="location.href='{{ url_for('project_page', project_id=project['project_id']) }}'"
+          >
+          See project
+          </button>  
+        
+          <div class="card-body d-flex w-100 justify-content-center">
+            <p class="card-text text-dark ms-2 my-auto">
+              {{ project["name"] }} | {{ project["category"] | capitalize }}
+            </p>
+            {% if project["public_key"] == session["public_key"] %}
+              <button disabled class="btn btn-dark btn-sm ms-3">
+                Owner
+              </button>
+            {% endif %}
+          </div>
+
+          <div class="card-footer">
+          {% if project["status"].lower() == "active" %}
+            <button disabled class="btn btn-primary btn-sm">
+              {{ project["status"] | capitalize }}
+            </button>
+            <button disabled class="btn btn-outline-dark btn-sm">
+              {{ project["days_left"] }}
+            </button>
+          {% else %}
+            <button disabled class="btn btn-danger btn-sm">
+              {{ project["status"] | capitalize }}
+            </button>
+          {% endif %}
+          <button disabled class="btn btn-success btn-sm">
+            {{ project["funding_progress"] }} funded
+          </button>
+        </div>
+        </div>
+      </div>
+      {% if (loop.index % 3 == 0) and (loop.index != 0) %}
+        <div class="w-100 my-3"></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+{% endblock %}

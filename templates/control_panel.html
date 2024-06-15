@@ -1,0 +1,326 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+  List of Projects
+{% endblock %}
+
+{% block main %}
+
+  <div class="container" id="controlPanelContainer">
+    
+    {% with parent_page = "control_panel.html" %}
+      {% include "includes/search.html" %}
+    {% endwith %}
+
+    <!-- Info cards section -->
+    <div class="row justify-content-center my-5">
+      <div class="col-md-3 col-md">
+        <div class="info-card">
+          <div class="info-card-title">{{ projects_list | count }}</div>
+          <p class="info-card-text">PROJECTS CREATED</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-md">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list | sum(attribute='total_donations') }}
+          </div>
+          <p class="info-card-text">LUMENS RECEIVED</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-md">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list|selectattr("status", "equalto", "active") | list | length }}
+          </div>
+          <p class="info-card-text">ACTIVE PROJECTS</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-md">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list | sum(attribute='goal') }}
+          </div>
+          <p class="info-card-text">FUNDING GOAL</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tables for fund projects and refund backers -->
+    <div class="row">
+      <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active btn-outline-orange"
+            id="fund-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#fundProjectsTab"
+            type="button"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+          >
+            Fund
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link btn-outline-orange"
+            id="refund-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#refundProjectsTab"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Refund
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link btn-outline-orange"
+            id="all-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#allProjectsTab"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            All
+          </button>
+        </li>
+      </ul>
+
+      <!-- Fund table -->
+      <div class="table-responsive mb-3" id="projectsAdminTable">
+        <div class="tab-content" id="myTabContent0">
+          <div
+            class="tab-pane active fade show"
+            id="fundProjectsTab"
+            role="tabpanel"
+            aria-labelledby="fund-tab"
+          >
+            <table class="table table-striped table-hover align-middle mb-5">
+              <tr>
+                {% for key in projects_list[0].keys() %}
+                  <th scope="col">
+                    {% if key in ["public_key", "image_path", "description"] %}
+                      {{ continue }}
+                    {% else %}
+                      {{ key | replace("_", " ") | upper }}
+                    {% endif %}
+                  </th>
+                {% endfor %}
+                <th scope="col">SELECT</th>
+              </tr>
+              {% for project in projects_list %}
+                {% if project["status"] == "fund" %}
+                  <tr class="projectRow2">
+                    {% for key, value in project.items() %}
+                      <td>
+                        {% if key in ["public_key", "image_path", "description"] %}
+                          {{ continue }}
+                        {% else %}
+                          {{ value | capitalize }}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                    <td>
+                      <label class="checkbox">
+                        <input
+                          class="admin-project-checkbox"
+                          type="checkbox"
+                          name="fund_checkbox"
+                          value="{{ project['project_id'] }}"
+                        />
+                      </label>
+                    </td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </table>
+
+            <div class="d-flex justify-content-between m-5">
+              <button
+                type="submit"
+                class="btn btn-white px-4 py-2"
+                id="fundButton"
+                value="fund"
+                onclick="buildAdminOperationsModal(this.value)"
+              >
+                FUND
+              </button>
+              <button
+                type="button"
+                class="btn btn-white px-4 py-2"
+                value="selectAllFunds"
+                onclick="selectAll(this)"
+              >
+                CHECK ALL
+              </button>
+            </div>
+          </div>
+
+          <!-- Refund table -->
+          <div
+            class="tab-pane fade"
+            id="refundProjectsTab"
+            role="tabpanel"
+            aria-labelledby="refund-tab"
+          >
+            <table class="table table-striped table-hover align-middle mb-5">
+              <tr>
+                {% for key in projects_list[0].keys() %}
+                  <th scope="col">
+                    {% if key in ["public_key", "image_path", "description"] %}
+                      {{ continue }}
+                    {% else %}
+                      {{ key | replace("_", " ") | upper }}
+                    {% endif %}
+                  </th>
+                {% endfor %}
+                <th scope="col">SELECT</th>
+              </tr>
+              {% for project in projects_list %}
+                {% if project["status"] == "refund" %}
+                  <tr class="projectRow2">
+                    {% for key, value in project.items() %}
+                      <td>
+                        {% if key in ["public_key", "image_path", "description"] %}
+                          {{ continue }}
+                        {% else %}
+                          {{ value | capitalize }}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                    <td>
+                      <label class="checkbox">
+                        <input
+                          class="admin-project-checkbox"
+                          type="checkbox"
+                          name="refund_checkbox"
+                          value="{{ project['project_id'] }}"
+                        />
+                      </label>
+                    </td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </table>
+
+            <div class="d-flex justify-content-between m-5">
+              <button
+                type="submit"
+                id="refundButton"
+                class="btn btn-white px-4 py-2"
+                value="refund"
+                onclick="buildAdminOperationsModal(this.value)"
+              >
+                REFUND
+              </button>
+              <button
+                type="button"
+                class="btn btn-white px-4 py-2"
+                value="selectAllRefunds"
+                onclick="selectAll(this)"
+              >
+                CHECK ALL
+              </button>
+            </div>
+          </div>
+
+          <!-- Show all projecs from database -->
+          <div
+            class="tab-pane fade"
+            id="allProjectsTab"
+            role="tabpanel"
+            aria-labelledby="all-tab"
+          >
+            <table class="table table-striped table-hover align-middle mb-5">
+              <tr>
+                {% for key in projects_list[0].keys() %}
+                  <th scope="col">
+                    {% if key in ["public_key", "image_path", "description"] %}
+                      {{ continue }}
+                    {% else %}
+                      {{ key | replace("_", " ") | upper }}
+                    {% endif %}
+                  </th>
+                {% endfor %}
+              </tr>
+              {% for project in projects_list %}
+                <tr class="projectRow">
+                  {% for key, value in project.items() %}
+                    <td>
+                      {% if key in ["public_key", "image_path", "description"] %}
+                        {{ continue }}
+                      {% else %}
+                        {{ value | capitalize }}
+                      {% endif %}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal for confirming transactions -->
+  <div
+    class="modal fade"
+    id="projectsModal"
+    tabindex="-1"
+    aria-labelledby="projectsModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectsModal">Confirm transactions?</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="projectsForm" name="projectsForm" class="px-5">
+            <!-- Selected projects are added here -->
+          </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button
+            type="button"
+            form="projectsForm"
+            class="btn btn-darkblue"
+            id="submitTransactionButton"
+            data-bs-dismiss="modal"
+          >
+            Submit Transaction
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% block scripts %}
+    <script src="{{ url_for('.static', filename='controlPanel.js') }}" async></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
+      integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  {% endblock %}
+
+{% endblock %}

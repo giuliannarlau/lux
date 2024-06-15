@@ -1,0 +1,21 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+  List of Projects
+{% endblock %}
+
+{% block main %}
+
+  <div class="container" id="projectsContainer">
+
+    <!-- Search bar -->
+    {% with parent_page = "projects.html" %}
+      {% include "includes/search.html" %}
+    {% endwith %}
+
+    <!-- Projects list with image cards -->
+    {% include "includes/projects_list.html" %}
+    
+  </div>
+
+{% endblock %}

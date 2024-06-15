@@ -1,0 +1,21 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+  Response
+{% endblock %}
+
+{% block main %}
+
+  <div class="row m-5 p-5 text-start gap-3">
+    <div>
+      <p class="fs-4">{{ bottom }}</p>
+    </div>
+
+    <hr class="mb-3 w-25" />
+
+    <a href="{{ referrer }}">
+      <button type="button" class="btn btn-outline-orange btn-lg">Return</button>
+    </a>
+  </div>
+
+{% endblock %}

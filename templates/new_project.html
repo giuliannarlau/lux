@@ -1,0 +1,189 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+  New Project
+{% endblock %}
+
+{% block main %}
+
+  <div class="container" id="newProjectContainer">
+    <form
+      action="/new_project"
+      method="post"
+      id="newProjectForm"
+      enctype="multipart/form-data"
+    >
+      <div class="row justify-content-center my-3">
+
+        <!-- Project info -->
+        <div class="col-md-4 px-4">
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text">NAME</span>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="projectName"
+              name="projectName"
+              placeholder="Choose a name for your project"
+              aria-label="projectName"
+              aria-describedby="addon-wrapping"
+              maxlength="20"
+            />
+          </div>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text">GOAL</span>
+            <input
+              required
+              type="number"
+              min="1"
+              class="form-control"
+              id="projectGoal"
+              name="projectGoal"
+              placeholder="Type your financial goal"
+              aria-label="projectGoal"
+              aria-describedby="addon-wrapping"
+              title="Enter the amount of Lumens you aim to raise for your project."
+            />
+          </div>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" min="datePickerId">EXPIRE DATE</span>
+            <input
+              required
+              type="date"
+              class="form-control"
+              id="projectExpireDate"
+              name="projectExpireDate"
+              min=""
+              onclick="getCurrentDate(this)"
+              aria-label="projectExpireDate"
+              aria-describedby="addon-wrapping"
+            />
+          </div>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="categorySpan">CATEGORY</span>
+            <select
+              required
+              class="form-select"
+              id="projectCategory"
+              name="projectCategory"
+            >
+              <option disabled selected>Select a category</option>
+              {% for category in categories_list %}
+                <option>{{ category | capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Image preview -->
+        <div class="col-md-4 mb-3">
+          <div class="container" id="previewContainer">
+            <img id="imagePreview"
+            src="/static/images/site/new_project_upload.png"
+            alt="project image"
+            />
+          </div>
+          <div class="d-flex justify-content-start">
+            <label
+              for="imageInput"
+              class="btn btn-outline-orange m-3"
+              id="uploadImageLabel"
+              >UPLOAD YOUR IMAGE
+            </label>
+            <input
+              required
+              type="file"
+              id="imageInput"
+              name="imageInput"
+              accept="image/*"
+              onchange="showImagePreview(this)"
+            />
+            <button
+              hidden
+              disabled
+              type="button"
+              id="cropImageBtn"
+              class="btn btn-outline-orange ms-2 my-3"
+              onclick="cropImage()"
+            >
+              CROP IMAGE
+            </button>
+          </div>
+        </div>
+
+        <!-- Image cropped -->
+        <div hidden class="col-md-4" id="croppedImgCol">
+          <div class="container" id="cropperContainer">
+            <img
+              hidden
+              id="imageCropped"
+              name="imageCropped"
+              src=""
+              accept="image/*"
+              alt="project cropped image"
+            />
+            <input hidden id="base64Image" name="base64Image" />
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5" />
+
+      <!-- Description -->
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md">
+          <div
+            class="input-group flex-nowrap"
+            style="min-height: 200px !important; max-width: 500px !important"
+          >
+            <textarea
+              required
+              type="text"
+              class="form-control mx-3 mb-3"
+              id="projectDescription"
+              name="projectDescription"
+              rows="20"
+              minlength="5"
+              maxlength="500"
+              placeholder="Write a short description for your project"
+              aria-label="projectDescription"
+              aria-describedby="addon-wrapping"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-md">
+          <button
+            type="submit"
+            class="btn btn-lg btn-outline-orange"
+            id="createProjectBtn"
+          >
+            CREATE PROJECT
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  {% block styles %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
+      integrity="sha512-cyzxRvewl+FOKTtpBzYjW6x6IAYUCZy3sGP40hn+DQkqeluGRCax7qztK2ImL64SA+C7kVWdLI6wvdlStawhyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  {% endblock %}
+
+  {% block scripts %}
+    <script src="{{ url_for('.static', filename='newProject.js') }}" async></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
+      integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  {% endblock %}
+
+{% endblock %}

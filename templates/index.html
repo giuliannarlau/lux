@@ -1,0 +1,79 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+  Index
+{% endblock %}
+
+{% block main %}
+
+  <div class="container" id="homepageContainer">
+    <div class="row mb-5">
+      <div class="col-lg-6 col-md px-4">
+        <h1 class="text-start mt-3">Where crypto funds a better future</h1>
+        <p class="text-start fs-5 fs-4 mb-5 mt-4">
+          Empowering dreams and innovations through collective strength. Join us
+          and turn ideas into reality with the power of decentralized financial
+          collaboration.
+        </p>
+        <div
+          class="d-flex flex-wrap flex-row justify-content-center align-items-center my-4"
+        >
+          <a class="btn btn-white btn-large" href="/projects" role="button">BACK A PROJECT</a>
+          <div class="vr mx-3"></div>
+          <a
+            class="btn btn-outline-orange btn-large"
+            name="{{ session['public_key'] }}"
+            id="startProjectLink"
+            role="button"
+            onclick="checkUser(this)"
+            >START A PROJECT</a
+          >
+        </div>
+      </div>
+      <div class="col-lg-6 col-lg">
+        <img
+          src="/static/images/site/homepage.png"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+
+    <!-- Info cards section -->
+    <div class="row justify-content-between">
+      <div class="col-sm-4 col-sm">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list|selectattr("status", "equalto", "successful") | list | length }}
+          </div>
+          <p class="info-card-text">Projects funded</p>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list | sum(attribute='total_donations') }}
+          </div>
+          <p class="info-card-text">Lumens donated</p>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm">
+        <div class="info-card">
+          <div class="info-card-title">
+            {{ projects_list | sum(attribute='goal') }}
+          </div>
+          <p class="info-card-text">Lumens pledged</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-start mt-5">
+      <h2 class="ms-3">Check out some of our projects</h2>
+    </div>
+
+    <hr class="mb-5" />
+
+    {% include "includes/projects_list.html" %}
+
+  </div>
+
+{% endblock %}

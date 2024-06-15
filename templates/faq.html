@@ -1,0 +1,125 @@
+{% extends "includes/layout.html" %}
+
+{% block title %}
+    About Us
+{% endblock %}
+
+{% block main %}
+
+  <div class="container" id="faqContainer">
+    <div class="row">
+      <div class="col">
+        <h1 class="fs-2 text-center mt-4">How it works</h1>
+      </div>
+    </div>
+
+    <hr class="mb-5" />
+
+    <div class="row">
+      <div class="col-lg-6">
+        <ul class="list-outline-orange">
+          <li class="list-group-item">
+            <div class="list-group-title">How do I create a wallet?</div>
+            <div class="item-description">
+              To start using our platform, you need to create a digital wallet through the Freighter extension. Here’s how to set it up:
+              <ol>
+                <li>Install the <a href="https://www.freighter.app/" class="text-orange">Freighter's extension</a> in your browser.</li>
+                <li>Open the extension and follow the instructions to create a new wallet. Make sure to save the 12-word recovery phrase securely. This phrase allows you to access your wallet from any browser.</li>
+                <li>Click on the 'Connect' button located at the top right corner of our platform.</li>
+                <li>Select 'Connect with Freighter' from the options.</li>
+                <li>Ensure you are on the TESTNET network.</li>
+                <li>Fund it using the friendbot feature within the Freighter extension. Don't worry, it's not real money.</li>
+              </ol>
+              Need a visual guide? <a href="" class="text-orange">Watch our video tutorial here.</a>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">How do I start my own project and how does it work?</div>
+            <div class="item-description">
+              Starting your own crowdfunding project is simple. Here's what you need to do:
+              <ol>
+                <li>Ensure your wallet is connected. Then, navigate to and click on 'New Project'.</li>
+                <li>Complete the required fields with your project information. This includes a description, goals, and other essential details.</li>
+                <li>Upload an image that represents your project. You will have the option to crop it for a perfect fit.</li>
+                <li>Once your project is live, you can monitor its progress on its specific page. Here, some details can be edited if needed.</li>
+                <li>If your project meets its funding goal by the deadline, the platform's admin account will transfer the collected lumens (XLM) to you.</li>
+                <li>Should the project not reach its goal, all funds will be returned to the backers, ensuring a risk-free contribution.</li>
+              </ol>
+              To manage and view all of your projects, visit the 'My Account' page.
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">How can I make a donation?</div>
+            <div class="item-description">
+              Making a donation to projects on our platform is straightforward. Follow these steps to support your chosen project:
+              <ol>
+                <li>First, make sure your Freighter wallet is connected to our platform. This is essential for processing your donation.</li>
+                <li>Navigate to the projects page, where you can search by category, status, or name, and click on the chosen project.</li>
+                <li>Enter the amount you wish to donate in the designated field on the project's specific page.</li>
+                <li>Click the 'Donate' button. The Freighter extension will then prompt you for confirmation and your password.</li>
+                <li>Once your donation is processed, you will receive a confirmation hash.</li>
+              </ol>
+              If the project does not reach its funding goal, your donation will be refunded.
+              To view and keep track of all your donations, click on 'My Account' on the navigation bar and select the 'My Donations' option.
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-6">
+        <ul class="list-outline-orange">
+          <li class="list-group-item">
+            <div class="list-group-title">How the admin account works?</div>
+            <div class="item-description">
+              The admin account funds and refunds projects after they expire:
+              <ol>
+                <li>Make sure you have inserted an admin public key in the .env file.</li>
+                <li>After connecting your admin account wallet, go to the 'Control Panel' page, which can only be accessed by the admin account.</li>
+                <li>Check the boxes of the projects to fund or refund and click on the respective button.</li>
+                <li>Upon action, a transaction is constructed and displayed in a new modal. Once confirmed, the Freighter extension is activated to sign the transaction.</li>
+                <li>The projects will have their status updated and can be seen on the 'All' tab from the Control Panel page.</li>
+              </ol>
+              The admin account is restricted from donating to or launching its own projects. Attempts to do so will redirect the user to the 'Control Panel' page.
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">How the transactions work?</div>
+            <div class="item-description">
+              Each Stellar transaction can include one or more operations.
+              Lux is configured so that a donation constitutes a single operation within a transaction.
+              However, when the admin funds or refunds multiple projects, a transaction may contain one or more operations, depending on the number of projects involved.
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">How the projects updates work?</div>
+            <div class="item-description">
+              Every time someone runs the program, the status of expired projects is updated accordingly: to
+              <span class="text-orange">'fund'</span> if the project reached its goal amount, to
+              <span class="text-orange">'refund'</span> if it received donations but did not reach the final goal, and to
+              <span class="text-orange">'unsuccessful'</span> if it did not receive any donations.
+              <!--TODO: After the admin account fund or refund projects the statuses are updated to 'successful' or 'unsuccessful' respectively.-->
+              All the transactions and projects save instantly on a local database.
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">Can I cancel my project?</div>
+            <div class="item-description">
+              Yes, you can cancel your project directly from its page, but this action is irreversible.
+              Any received donations will be refunded to doners, and your project's status will be updated to 'refund',
+              otherwise the status will change to 'unsuccessful'.
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="list-group-title">How do I run and test this project?</div>
+            <div class="item-description">
+              You can run it locally. To start a project or make a donation, you need to create
+              and fund a Freighter wallet first. To test the admin account, you need to add the 
+              public key into the configuration file. Check out the READ ME to learn how.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

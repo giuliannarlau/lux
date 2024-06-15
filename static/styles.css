@@ -1,0 +1,522 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #0d062d, #1c0a6b);
+  background-image: linear-gradient(
+    to bottom,
+    #12102f,
+    #131239,
+    #151344,
+    #17144e,
+    #191559
+  );
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: "Trebuchet MS", sans-serif;
+  min-width: 100%;
+  text-align: center;
+  min-height: 100vh;
+}
+
+footer {
+  bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+
+/* Dividers */
+
+hr {
+  color: #fea928;
+  height: 10px;
+  opacity: 1;
+}
+
+.vr {
+  color: #fea928;
+  width: 2px;
+  opacity: 0.7;
+}
+
+/* Navbars for header and footer */
+
+nav {
+  background: white;
+}
+
+.nav-link,
+.navbar-brand {
+  color: #000041;
+  margin-left: 10px;
+}
+
+.nav-link:hover,
+.navbar-brand:hover {
+  color: #000041;
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.35);
+  transform: scale(1.1);
+}
+
+.wrapper {
+  flex: 1;
+}
+
+
+/* Text colors */
+
+.text-orange {
+  color:#fea928;
+}
+
+.text-dark {
+  color: #050b3a;
+}
+
+
+/* Inputs and selects */
+
+input,
+select {
+  height: 50px;
+  width: 300px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.input-group {
+  margin: 10px auto 40px;
+  max-width: 350px;
+  max-height: 60px;
+}
+
+.input-textarea {
+  position: relative;
+  margin: 10px auto 40px;
+  max-width: 600px;
+  min-width: 360px;
+}
+
+
+/* Image cards */
+
+.project-card {
+  align-items: center;
+  border: transparent;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5), 0 6px 10px 0 rgba(0, 0, 0, 0.4);
+  height: 100%;
+  margin:auto;
+  max-height: 450px;
+  max-width: 350px;
+  text-align: center;
+}
+
+.card-img {
+  height: 310px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  max-height: 80px;;
+}
+
+.card-footer {
+  padding: 12px 10px;
+  max-height: 60px;
+  overflow: hidden;
+  width: 100%
+}
+
+.card-text {
+  font-size: min(14px, 6vw);
+}
+
+.card-title {
+  color: #000041;
+  font-size: 30px;
+  text-shadow: 1px 1px #2c0c91;
+}
+
+
+/* Cards used to display info */
+
+.info-card {
+  align-items: center;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5), 0 6px 10px 0 rgba(0, 0, 0, 0.4);
+  color: #c9451c;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 2%;
+  text-align: center;
+  max-height: 85px;
+  max-width: 80%;
+  min-width: 170px;
+}
+
+.info-card-title {
+  font-size: 25px;
+}
+
+.img-fluid {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+  min-width: 30vw;
+  max-height: 60vh;
+}
+
+
+/* Buttons */
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.btn-darkblue {
+  background: #0d062d;
+  color: white;
+}
+
+.btn-darkblue:hover {
+  background: #0d062d;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 2px 6px 0 rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.btn-white {
+  background: white;
+  border: 3px solid #fea928;
+  color: #000041;
+}
+
+.btn-white:hover {
+  background: transparent;
+  border: 1px solid #fea928;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 2px 6px 0 rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.btn-outline-darkblue {
+  background: transparent;
+  border: 2px solid #000041;
+  color: #000041;
+}
+
+.btn-outline-darkblue:hover {
+  background: #0d062d;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.btn-orange {
+  background: #fea928;
+  border: none;
+  color: white;
+}
+
+.btn-orange:hover {
+  opacity: 0.8;
+  transform: none;
+}
+
+.btn-outline-orange {
+  border: 1px solid #fea928;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 2px 6px 0 rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.btn-outline-orange:hover {
+  background: white;
+  color: #000041;
+}
+
+.btn-xlarge {
+  font-size: 18px;
+  font-weight: 20px;
+  padding: 20px;
+  margin: 10px;
+  max-height: 65px;
+  max-width: 320px;
+  min-width: 150px;
+  white-space: nowrap;
+  width:80%;
+}
+
+.btn-large {
+  font-weight: 20px;
+  padding: 20px;
+  margin: 10px;
+  max-height: 65px;
+  max-width: 250px;
+  min-width: 250px;
+  width: 40%;
+}
+
+.btn-medium {
+  padding: 15px;
+  width: 40%;
+  max-width: 190px;
+}
+
+.btn-small {
+  font-size: 15px;
+  max-height: 50px;
+  max-width: 130px;
+  width: 50%;
+}
+
+.btn-xsmall {
+  font-size: 13px;
+  margin: auto;
+  max-height: 35px;
+  max-width: 110px;
+  width: 32%;
+}
+
+
+/* FAQ and About lists */
+
+.list-outline-orange {
+  border: 1px solid #fea928;
+  border-radius: 15px;
+  height: 100%;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.list-group-item {
+  border-radius: 15px;
+  max-width: 90%;
+  padding: 16px;
+}
+
+.list-group-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+  text-align: start;
+}
+
+.item-description {
+  font-size: 18px;
+}
+
+
+/* Modals */
+
+.modal {
+  color: #050b3a;
+}
+
+.modal td {
+  color: #050b3a;
+}
+
+
+/* On tabs for admin page */
+
+#fund-tab,
+#refund-tab,
+#all-tab {
+  border: 1px solid white;
+}
+
+#donationsHistoryTable tr,
+td {
+  background-color: transparent !important;
+}
+
+#donationsHistoryTable th {
+  background-color: transparent !important;
+  color: #dcdee0;
+}
+
+#donationsHistoryTable td {
+  color: #dcdee0;
+}
+
+
+/* Search bar */
+
+.search-form label {
+  color: #dcdee0;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.search-form input,
+.search-form select {
+  border-radius: 5px;
+  padding: 5px 13px;
+  margin: auto;
+}
+
+
+/* Containers */
+
+/* Index */
+#homepageContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 3% 8%;
+  text-align: justify;
+}
+
+
+/* Projects */
+#projectsContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 8%;
+  padding-top: 3%;
+}
+
+/* New Project */
+#newProjectContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 3%;
+  padding-top: 3%;
+  text-align: center;
+}
+
+/* Project */
+#projectPageContainer {
+  margin-top: 5%;
+  min-height: 100%;
+  min-width: 100%;
+  padding-left: 5%;
+  padding-right: 10%;
+  text-align: center;
+}
+
+/* My Account */
+#accountContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 8%;
+  padding-bottom: 1%;
+  padding-top: 3%;
+}
+
+/* Control Panel */
+#controlPanelContainer {
+  margin-top: 5%;
+  min-height: 100%;
+  min-width: 100%;
+  padding-left: 8%;
+  padding-right: 10%;
+  text-align: center;
+}
+
+/* About Us */
+#aboutContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 8%;
+  padding-bottom: 1%;
+  padding-top: 3%;
+  text-align: justify;
+}
+
+/* FAQ */
+#faqContainer {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 8%;
+  padding-bottom: 1%;
+  padding-top: 3%;
+  text-align: justify;
+}
+
+/* Project Page */
+
+#donationCollapse label {
+  color: white;
+}
+
+#projectPageForm input {
+  color: white;
+}
+
+#donateButton {
+  max-width: 30%;
+}
+
+#editProjectModal {
+  left: 50%;
+  max-width: 700px;
+  padding: 0 !important;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+#editProjectForm input,
+#editProjectForm select {
+  display: flex;
+  margin: auto;
+  max-width: 500px;
+  position: relative;
+}
+
+#editProjectForm textarea {
+  margin: 10px auto 40px;
+}
+
+
+/* New Project page */
+
+#startProjectLink:hover {
+  background: transparent;
+  border: 1.5px solid #fea928;
+  color: #fff8ed;
+  transform: scale(1.05);
+}
+
+
+#imagePreview,
+#imageCropped {
+  object-fit: cover;
+  min-height: 280px;
+  min-width: 300px;
+  max-height: 300px;
+  max-width: 330px;
+}
+
+#previewContainer,
+#cropperContainer {
+  margin-left: 3px;
+  min-height: 280px;
+  min-width: 300px;
+  max-height: 300px;
+  max-width: 330px;
+}
+
+/* Control panel page */
+
+#projectsAdminTable th,
+td {
+  background-color: transparent !important;
+  color: #dcdee0;
+  margin: auto;
+}
+
+#projectsAdminTable td {
+  color: #dcdee0;
+}
+
+#modalAdminTable td {
+  color: #000041;
+}
+
+.admin-project-checkbox {
+  width: 25px;
+}
